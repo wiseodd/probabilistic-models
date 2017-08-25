@@ -10,4 +10,5 @@ Collection of simple examples of various probabilistic models.
 ## List of Models
 
 1. Probabilistic Linear Regression
-2. Gaussian Process Regression
+2. Bayesian Linear Regression
+3. Gaussian Process Regression
