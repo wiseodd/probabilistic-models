@@ -1,5 +1,5 @@
-# Bayesian Models
-Collection of simple examples of various Bayesian models and inferences.
+# Probabilistic Models
+Collection of simple examples of various probabilistic models.
 
 ### Dependencies
 
@@ -9,4 +9,5 @@ Collection of simple examples of various Bayesian models and inferences.
 
 ## List of Models
 
-1. Gaussian Process Regression
+1. Probabilistic Linear Regression
+2. Gaussian Process Regression
