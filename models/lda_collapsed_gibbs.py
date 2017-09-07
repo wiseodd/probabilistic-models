@@ -93,12 +93,6 @@ print(X)
 
 print()
 
-print('Word topic assignment:')
-print('-------------------------')
-print(Z)
-
-print()
-
 print('Document topic distribution:')
 print('----------------------------')
 print((c_ik + alpha) / np.sum(c_ik + alpha, axis=1)[:, np.newaxis])
