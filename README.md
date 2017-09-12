@@ -12,3 +12,4 @@ Collection of simple examples of various probabilistic models.
 1. Probabilistic Linear Regression
 2. Bayesian Linear Regression
 3. Gaussian Process Regression
+4. Bayesian Dark Knowledge (SGLD + Distillation) [Current implm., accuracy is not good!]
