@@ -15,8 +15,8 @@ N = mnist.train.images.shape[0]  # training set size
 M = 100  # minibatch size
 T = 10000  # num of iteration
 
-Theta = np.random.randn(X_dim, y_dim) * 0.001
-W = np.random.randn(X_dim, y_dim) * 0.001
+Theta = np.vstack([np.zeros([1, y_dim]), np.random.randn(X_dim, y_dim) * 0.001])
+W = np.vstack([np.zeros([1, y_dim]), np.random.randn(X_dim, y_dim) * 0.001])
 
 
 def softmax(x):
@@ -33,18 +33,20 @@ lam = 1  # teacher prior
 gam = 1e-3  # student prior
 
 burnin = 1000
-thinning = 100
+thinning = 10
 
 for t in range(1, T+1):
     # Train teacher
     # -------------
     X_mb, y_mb = mnist.train.next_batch(M)
+    X_train = np.hstack([X_mb, np.ones([M, 1])])  # add bias dim
+
     eta_t = eta/t
 
-    p = softmax(X_mb @ Theta)
+    p = softmax(X_train @ Theta)
     grad_p = p - y_mb
 
-    grad_loglik = X_mb.T @ grad_p  # 784x16 . 16x10
+    grad_loglik = X_train.T @ grad_p  # 784x16 . 16x10
     grad_logprior = lam * Theta
     grad_logpost = grad_logprior + N/M * grad_loglik
 
@@ -56,15 +58,16 @@ for t in range(1, T+1):
         # Train student
         # -------------
         X_s_mb = X_mb + np.random.normal(0, 1e-3)  # perturb
+        X_s_train = np.hstack([X_s_mb, np.ones([M, 1])])  # add bias dim
         rho_t = rho/t
 
-        s = softmax(X_s_mb @ W)
-        p = softmax(X_s_mb @ Theta)
+        s = softmax(X_s_train @ W)
+        p = softmax(X_s_train @ Theta)
         grad_s = s - p
 
-        grad_loglik = X_s_mb.T @ grad_s  # 784x16 . 16x10
+        grad_loglik = X_s_train.T @ grad_s  # 784x16 . 16x10
         grad_logprior = gam * W
-        grad_logpost = grad_logprior + 1/M * grad_loglik
+        grad_logpost = grad_logprior + 1/M*grad_loglik
 
         delta = rho_t * grad_logpost
         W -= delta
@@ -72,10 +75,8 @@ for t in range(1, T+1):
     # Diagnostics
     # -----------
     if t % 1000 == 0:
-        s = softmax(X_mb @ W)
-
-        loss = -gam/2 * np.sum(W**2) - np.mean(np.sum(y_mb * np.log(s + 1e-8), 1))
-
+        s = softmax(X_train @ W)
+        loss = -gam/2 * np.sum(W**2) - np.sum(y_mb * np.log(s + 1e-8))
         print('Iter: {}; S_loss: {:.4f}'.format(t, loss))
 
 
@@ -83,6 +84,7 @@ for t in range(1, T+1):
 # ----
 
 X_test, y_test = mnist.test.images, mnist.test.labels
+X_test = np.hstack([X_test, np.ones([X_test.shape[0], 1])])  # add bias dim
 
 y = softmax(X_test @ W)
 acc = np.mean(y.argmax(axis=1) == y_test.argmax(axis=1))
