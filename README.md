@@ -9,7 +9,14 @@ Collection of simple examples of various probabilistic models.
 
 ## List of Models
 
+### Bayesian Models
+1. Bayesian Linear Regression
+
+### Bayesian Non-parametric
+1. Gaussian Process Regression
+2. Chinese Restaurant Process (CRP)
+3. Indian Buffet Process (IBP)
+
+### Others
 1. Probabilistic Linear Regression
-2. Bayesian Linear Regression
-3. Gaussian Process Regression
-4. Bayesian Dark Knowledge (SGLD + Distillation) [Current implm., accuracy is not good!]
+2. Bayesian Dark Knowledge (SGLD + Distillation)
