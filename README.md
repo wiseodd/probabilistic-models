@@ -1,5 +1,5 @@
-# Probabilistic Models
-Collection of simple examples of various probabilistic models.
+# Bayesian Models
+Collection of simple examples of various Bayesian models.
 
 ### Dependencies
 
