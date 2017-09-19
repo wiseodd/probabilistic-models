@@ -9,7 +9,9 @@ Collection of simple examples of various Mixture Models.
 
 ## List of Models
 
-1. Gaussian Mixture Model (GMM)
+1. Gaussian Mixture Model (GMM) with:
+    1. EM for maximum likelihood
+    2. Gibbs Sampler for bayesian inference
 2. Mixture of Linear Regression
 3. LDA with:
     1. Gibbs Sampler
