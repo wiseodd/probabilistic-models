@@ -10,7 +10,8 @@ import matplotlib.pyplot as plt
 # Generate data
 X1 = np.random.multivariate_normal([5, 5], np.diag([0.5, 0.5]), size=20)
 X2 = np.random.multivariate_normal([8, 8], np.diag([0.5, 0.5]), size=20)
-X = np.vstack([X1, X2])
+X3 = np.random.multivariate_normal([20, 20], np.diag([0.5, 0.5]), size=10)
+X = np.vstack([X1, X2, X3])
 
 N, D = X.shape
 
@@ -39,9 +40,11 @@ Ns.append(N)
 mus.append(G0.rvs())
 K = 1
 
+mvn = st.multivariate_normal
+
 
 # Gibbs sampler
-for it in range(200):
+for it in range(20):
     # --------------------------------------------------------
     # Sample from full conditional of assignment from CRP prior
     # z ~ GEM(alpha)
@@ -79,11 +82,11 @@ for it in range(200):
         for k in range(K):
             nk_minus = zs_minus_i[zs_minus_i == k].shape[0]
             crp = nk_minus / (N + alpha - 1)
-            probs[k] = crp*st.multivariate_normal.pdf(X[i], mus[k], sigma)
+            probs[k] = crp * mvn.pdf(X[i], mus[k], sigma)
 
         # Prob of creating new cluster
         crp = alpha / (N + alpha - 1)
-        lik = st.multivariate_normal.pdf(X[i], mu0, sigma0)
+        lik = mvn.pdf(X[i], mu0, sigma0+sigma)  # marginal dist. of x
         probs[K] = crp*lik
 
         # Normalize
@@ -123,7 +126,7 @@ for it in range(200):
         mus_post = left @ right
 
         # Draw new mean sample from posterior
-        mus[k] = st.multivariate_normal.rvs(mus_post, cov_post)
+        mus[k] = mvn.rvs(mus_post, cov_post)
 
 
 # Even though we only initialize with one cluster, the result should be:
@@ -132,5 +135,8 @@ for it in range(200):
 # ----------------
 # 20 data in cluster-0, mean: [ 5  5 ]
 # 20 data in cluster-1, mean: [ 8  8 ]
+# 10 data in cluster-2, mean: [ 20  20 ]
+#
+# Note: cluster label is exchangeable
 for k in range(K):
     print('{} data in cluster-{}, mean: {}'.format(Ns[k], k, mus[k]))
