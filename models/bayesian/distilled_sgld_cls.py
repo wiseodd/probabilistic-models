@@ -7,7 +7,7 @@ import numpy as np
 from tensorflow.examples.tutorials.mnist import input_data
 
 
-mnist = input_data.read_data_sets('../MNIST_data', one_hot=True)
+mnist = input_data.read_data_sets('../../MNIST_data', one_hot=True)
 X_dim = mnist.train.images.shape[1]
 y_dim = mnist.train.labels.shape[1]
 
