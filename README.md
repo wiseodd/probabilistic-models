@@ -12,7 +12,9 @@ Also present are non-bayesian MLE models, e.g. GMM with EM.
 
 ### Bayesian Models
 1. Bayesian Linear Regression
-2. Gaussian Mixture Model (GMM) with Gibbs Sampler
+2. Gaussian Mixture Model (GMM) with:
+    1. Gibbs Sampler
+    2. Mean-field Variational Inference
 3. LDA with:
     1. Gibbs Sampler
     2. Collapsed Gibbs Sampler
