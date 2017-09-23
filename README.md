@@ -1,6 +1,5 @@
-# Bayesian Models
-Collection of simple examples of various Bayesian models.
-Also present are non-bayesian MLE models, e.g. GMM with EM.
+# Probabilistic Models
+Collection of examples of various probabilistic models and inference algorithms.
 
 ### Dependencies
 
@@ -8,9 +7,9 @@ Also present are non-bayesian MLE models, e.g. GMM with EM.
 2. Numpy
 3. Matplotlib
 
-## List of Models
+## List of Models/Algorithms
 
-### Bayesian Models
+### Bayesian Inference
 1. Bayesian Linear Regression
 2. Gaussian Mixture Model (GMM) with:
     1. Gibbs Sampler
@@ -28,7 +27,7 @@ Also present are non-bayesian MLE models, e.g. GMM with EM.
     2. Stick Breaking Construction
     3. Indian Buffet Process (IBP)
 
-### Others
+### Others (MLE)
 1. Probabilistic Linear Regression
 2. Mixture of Linear Regression with EM
 3. GMM with EM
