@@ -17,6 +17,7 @@ Collection of examples of various probabilistic models and inference algorithms.
 3. LDA with:
     1. Gibbs Sampler
     2. Collapsed Gibbs Sampler
+    3. Mean-field Variational Inference
 4. Bayesian Dark Knowledge (SGLD + Distillation)
 
 ### Bayesian Non-parametric
