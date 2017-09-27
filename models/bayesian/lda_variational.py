@@ -1,7 +1,7 @@
 """
 LDA with Gibbs Sampler
 ======================
-Reference: Kevin Murphy's book Ch. 27
+Reference: Blei DM, Kucukelbir A, McAuliffe JD. Variational inference: A review for statisticians. Journal of the American Statistical Association. 2017.
 """
 import numpy as np
 from scipy.special import digamma
@@ -54,9 +54,6 @@ lam /= np.sum(lam, axis=1)[:, np.newaxis]  # normalize
 # -------------
 
 for it in range(100):
-    phi_old = np.copy(phi)
-    gamma_old = np.copy(gamma)
-
     # Until phi and gamma converge:
     for _ in range(50):
         for d in range(N_D):
