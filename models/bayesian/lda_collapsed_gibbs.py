@@ -41,7 +41,7 @@ c_vk = np.zeros(shape=[N_W, N_K], dtype=int)
 c_k = np.zeros(shape=N_K, dtype=int)
 
 for i in range(N_D):
-    for v in range(N_W):
+    for v in X[i]:
         # Randomly assign word's topic
         k = np.random.randint(N_K)
         Z[i, v] = k
@@ -63,7 +63,7 @@ for it in range(1000):
     # Sample from full conditional of Z
     # ---------------------------------
     for i in range(N_D):
-        for v in range(N_W):
+        for v in X[i]:
             # Sufficient statistics for the full conditional
             k = Z[i, v]
             c_ik[i, k] -= 1
